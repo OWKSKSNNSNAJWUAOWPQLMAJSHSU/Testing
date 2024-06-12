@@ -1,47 +1,740 @@
+worldFile = 'C:\\Users\\Administrator\\Desktop\\Lucifer\\test.txt'              -- world file name, format = world|door
+maxPlayer = 4                                                                   -- auto check player after warp
 
-setting = {
-    ---> choose "normal" / "guest" account
-    account = "guest",
-    ---> socks5 config
-    proxy = {access = false, botpersocks = 1},
-    ---> symbol format account text
-    symbol = "|",
-    ---> delay bot login
-    delay = 2000,
-    ---> normal account config
-    botList = {
-        "user|pass",
-        "user|pass",
-        "user|pass"
-    },
-    ---> guest config
-    growidletter = 9, 
-    ---> mac & rid guest list
-    macrid = {
-        '02:62:CC:25:B2:90|5137C1D0214313DE48A5AA93EF6AB5AB',
-        '02:9D:EB:44:F7:FF|8E22F3A6D1B296F7F0A15215B12F0F25',
-        '02:E7:08:A1:48:9C|6FC2C2C7020E94FC6CACA99A6A90C262',
-        '02:39:31:1D:71:51|66A29FDFFC731BF9CE49B3A42191CCE1',
-        '02:3A:83:88:23:75|8D8B429F18468D8E863EF99AD56A5BCB',
-        '02:BB:A7:AA:55:83|1E9DF809CA578B6039209493250BF2F1',
-        '02:3B:D7:A1:63:BB|2FB5582028F46F3A9403613E1535E65F',
-        '02:E4:2E:06:D4:2D|2DC8AAF0A645BF0E3AA2023F7FC56773',
-        '02:7A:78:10:54:D1|2E689993048A972A8F9F4DDE04C1ED44',
-        '02:08:32:B4:5E:93|730C8A34C179BFC813C5543FB603D809',
-        '02:B2:71:80:56:64|58673C9073C473D3C9656975C846F2D6',
-        '02:82:17:CD:0A:39|D9CB34FE025C11182FDB9A20FBA0EF0C',
-        '02:A0:FB:B7:5F:2E|8ED53F732549615D8AECE9538EF17792',
-    },
-    ---> proxy socks5 list
-    socksList = {
-        "ip:port:user:pass",
-        "ip:port:user:pass",
-        "ip:port:user:pass"
-    }
+pickaxe = false                                                                 -- set true to take pickaxe
+worldPickaxe = {'x|x'}                                                          -- world pickaxe name
+
+itemWhitelist = {98}                                                            -- dont trash
+
+saveSeed = false                                                                -- set true to save seed
+worldStorage = {'x|x', 'x|x', 'x|x'}                                              -- storage list
+limit = 10000                                                                   -- Limit seed each storage
+posId = 16                                                                      -- pos drop id
+
+folderName = 'resultDF'
+replaceLava = false
+
+delayplace = 150
+delaypunch = 285
+delayplant = 150
+delayharvest = 180
+delaywarp = 10000
+delaydrop = 2000
+delayreconnect = 30000
+
+--=================================--
+--=================================--
+--=================================--
+
+local bot = getBot()
+local inventory = getBot():getInventory()
+local printed = getBot():getLog()
+local command = "mkdir " .. folderName
+os.execute(command)
+math.randomseed(os.time() + os.clock() * 100000)
+bot.auto_reconnect = true
+bot.legit_mode = false
+bot.collect_range = 3
+local indx = 1
+local initialize = {18, 32, 6336, 9640}
+local customizable = {
+    tilx = 0, 
+    tileY = 0
 }
 
---==========================================--
---------------[ Uneditable Area ]-------------
---==========================================--
+local tileDirt = {-2, 0, 2}
+local defaultSeed = {3, 5, 11, 15}
+local defaultBlock = {2, 4, 10, 14}
+local events = {
+    nukeds = function(variant, netid)
+        if variant:get(0):getString() == 'OnConsoleMessage' then
+            if variant:get(1):getString():lower():find('inaccessible.') or variant:get(1):getString():lower():find('unknown reason.') then
+                nuked = true
+            end
+            unlistenEvents()
+        end
+    end
+}
 
-return(function(...)local L={"ZXEpQ6==","bIEwnRG=","Ubkw","bIE7tXWdQK==","tR2zC/Ep","NX2oUR24UK==";"URVLZR5P";"HmWzNB5wCR2jUK==","CmWzNm0Ty3E3ZbNjnfdzCm2FUb5dNX59thWdth6jZfEYyzEbHI5y+zV1+zVxHdU26+Eb+DD0s+DO+zrs2HExUbW9y+o9nfdjyfIrCRG9WRVeNhdLUK==","bIEhZL==";"nf2z","sR2zC/Ep";"t/ErnK==","22kbNsDr6I2fZfzq";"tX2q"}for q,l in ipairs({{1,15};{1;12},{13;15}})do while l[1]<l[2]do L[l[1]],L[l[2]],l[1],l[2]=L[l[2]],L[l[1]],l[1]+1,l[2]-1 end end local function q(q)return L[q+8448]end do local q=math.floor local l=table.insert local H=table.concat local k=L local C=string.sub local N=string.len local Q={j=46,G=56;n=25;X=38,["8"]=59;J=42;F=34,t=27,i=60;O=10;m=7,M=2,["4"]=51;N=28;R=22,["/"]=6;["5"]=13;x=1;u=62;f=54,V=57,["+"]=20;s=19;z=52;B=4;Y=45;h=39,L=48,p=36,r=33,W=17;S=63,["7"]=41;k=9,P=43,K=0;["2"]=21;Q=30;["0"]=12;I=53;b=23;l=8;C=26;v=32,q=55;Z=24,["9"]=47,["6"]=16,E=61,T=58,c=31;d=37;A=40,o=49,w=44,U=29;y=11;["3"]=50;D=5;["1"]=14;g=3;H=18,e=35,a=15}local i=string.char local F=type for L=1,#k,1 do local u=k[L]if F(u)=="string"then local F=N(u)local x={}local T=1 local S=0 local s=0 while T<=F do local L=C(u,T,T)local H=Q[L]if H then S=S+H*64^(3-s)s=s+1 if s==4 then s=0 local L=q(S/65536)local H=q((S%65536)/256)local k=S%256 l(x,i(L,H,k))S=0 end elseif L=="="then l(x,i(q(S/65536)))if T>=F or C(u,T+1,T+1)~="="then l(x,i(q((S%65536)/256)))end break end T=T+1 end k[L]=H(x)end end end return(function(L,H,k,C,N,Q,i,u,F,A,g,l,s,T,x,S)x,T,u,s,l,g,S,F,A=function()T=1+T u[T]=1 return T end,0,{},function(L)local q,l=1,L[1]while l do u[l],q=u[l]-1,q+1 if u[l]==0 then u[l],F[l]=nil,nil end l=L[q]end end,function(l,k,C,N)local x,i,s,u,S,F,T while l do F=k x=q(-8443)l=q(-8442)i=L[x]x=q(-8436)u=l l=i[x]T=q(-8439)i=l()l=q(-8446)S=L[T]T=q(-8440)x=i i=S[T]x[l]=i l=q(-8433)i=u x[l]=i i=q(-8438)l=q(-8445)l=x[l]l=l(x)s=q(-8435)u=nil S=l l=L[i]T=S[s]i=l(T)l=i()S=nil l=L[q(-8437)]i={}x=nil end l=#N return H(i)end,function(L)u[L]=u[L]-1 if u[L]==0 then u[L],F[L]=nil,nil end end,function(L)for q=1,#L,1 do u[L[q]]=1+u[L[q]]end if k then local l=k(true)local H=N(l)H[q(-8447)],H[q(-8441)],H[q(-8434)]=L,s,function()return-1690646 end return l else return C({},{[q(-8441)]=s;[q(-8447)]=L,[q(-8434)]=function()return-1690646 end})end end,{},function(L,q)local H=S(q)local k=function(...)return l(L,{...},q,H)end return k end return(A(8840783,{}))(H(i))end)(getfenv and getfenv()or _ENV,unpack or table[q(-8444)],newproxy,setmetatable,getmetatable,select,{...})end)(...)
+if saveSeed then
+    for _, value in pairs(itemWhitelist) do
+        table.insert(initialize, value)
+    end
+    for _, id in pairs(defaultSeed) do
+        table.insert(initialize, id)
+    end
+else
+    for _, id in pairs(itemWhitelist) do
+        table.insert(initialize, id)
+    end
+end
+
+itemFloat = function(id)
+    return bot:getWorld().growscan:getObjects()[id] or 0
+end
+
+itemCheck = function(tbl, int)
+    for _, num in pairs(tbl) do
+        if num == int then
+            return true
+        end
+    end
+    return false
+end
+
+notifications = function(description)
+    messageBox = MessageBox.new()
+    messageBox.title = 'Caramoy Syndicate'
+    messageBox.description = description
+    messageBox:send()
+end
+
+txtInfo = function(content)
+    printed:append(content)
+    notifications(string.upper(bot.name)..' : '..content)
+    error(content)
+end
+
+readFile = function(filename)
+    local file = io.open(filename, "r")
+    if not file then
+        txtInfo("Cant open file " .. filename)
+    end
+    local content = {}
+    for line in file:lines() do
+        table.insert(content, line)
+    end
+    file:close()
+    return content
+end
+
+shuffle = function(tbl)
+    local n = #tbl
+    for i = n, 2, -1 do
+        local j = math.random(i)
+        tbl[i], tbl[j] = tbl[j], tbl[i]
+    end
+    return tbl
+end
+
+assignBot = function(filename, limit)
+    limit = limit or 1
+    local worlds = readFile(filename)
+    shuffle(worlds)
+    local world = {}
+    local start = math.floor((bot.index - 1) / limit) + 1
+    local range = math.ceil(#getBots() / limit)
+    for index = start, #worlds, range do
+        if worlds[index] then
+            table.insert(world, worlds[index])
+        end
+    end
+    return world
+end
+
+assignedWorlds = assignBot(worldFile, #getBots())
+seedTbl = shuffle(worldStorage)
+
+split = function(str, ptr)
+    if not ptr then
+        ptr = '%s'
+    end
+    local tbl = {}
+    for string in string.gmatch(str, ptr) do
+        table.insert(tbl, string)
+    end
+    return tbl
+end
+
+botPunch = function(x, y)
+    for _, num in pairs(tileDirt) do
+        if getTile(x, y + num).fg ~= 0 or getTile(x, y + num).bg ~= 0 and hasAccess(x, y + num) ~= 0 then
+            return true
+        end
+    end
+    return false
+end
+
+clientStatic = function()
+    local statusMap = {
+        [BotStatus.offline] = 'Offline', 
+        [BotStatus.account_banned] = 'Suspended', 
+        [BotStatus.location_banned] = 'Location Banned', 
+        [BotStatus.too_many_login] = 'Too Many Login', 
+        [BotStatus.maintenance] = 'Maintenance', 
+        [BotStatus.error_connecting] = 'Error Connecting', 
+        [BotStatus.http_block] = 'HTTP Block', 
+        [BotStatus.changing_subserver] = 'Changing Subserver', 
+        [BotStatus.mod_entered] = 'Mod Entered'
+    }
+    return (statusMap[bot.status] or 'Online')
+end
+
+clientStatus = function()
+    if bot.status ~= BotStatus.online then
+        printed:append('bot is '..clientStatic())
+        bot.auto_reconnect = false
+        while bot.status ~= BotStatus.online do
+            bot:connect()
+            sleep(delayreconnect)
+            if bot.status == BotStatus.account_banned then
+                bot:updateBot('Banned' .. bot.index)
+                txtInfo('status is '..clientStatic())
+            end
+        end
+        printed:append('bot is '..clientStatic())
+        bot.auto_reconnect = true
+    end
+end
+
+reconnect = function(world, id, x, y)
+    if bot.status ~= BotStatus.online then
+        clientStatus()
+    end
+    if not bot:isInWorld(world:upper()) then
+        addEvent(Event.variantlist, events.nukeds)
+        while not bot:isInWorld(world:upper()) and not nuked do
+            bot:warp(world:upper())
+            listenEvents(5)
+            sleep(delaywarp)
+        end
+        removeEvents()
+    end
+    if bot:isInWorld(world:upper()) and id ~= '' then
+        while getTile(bot.x,bot.y).fg == 6 do
+            bot:warp(world:upper(),id:upper())
+            sleep(delaywarp)
+        end
+    end
+    if getTile(bot.x, bot.y).fg == 6 and id ~= '' then
+        while getTile(bot.x,bot.y).fg == 6 do
+            bot:warp(world:upper(),id:upper())
+            sleep(delaywarp)
+        end
+    end
+    if x and y then
+        while bot.x ~= x or bot.y ~= y do
+            bot:findPath(x,y)
+            sleep(250)
+        end
+    end
+end
+
+warp = function(world, door)
+    name = world
+    if door ~= '' then
+        name = name .. '|' ..door
+    end
+    if not bot:isInWorld(world:upper()) then
+        addEvent(Event.variantlist, events.nukeds)
+        while not bot:isInWorld(world:upper()) and not nuked do
+            clientStatus()
+            bot:warp(name)
+            listenEvents(5)
+            sleep(delaywarp)
+        end
+        removeEvents()
+    end
+    if bot:isInWorld(world:upper()) and door ~= '' then
+        local stuck  = 0
+        while getTile(bot.x, bot.y).fg == 6 and not wrong do
+            clientStatus()
+            bot:warp(name)
+            sleep(delaywarp)
+            stuck = stuck + 1
+            if stuck == 5 then
+                wrong = true
+            end
+        end
+    end
+end
+
+recycles = function(worlds, doors)
+    for _, item in pairs(inventory:getItems()) do
+        if not itemCheck(initialize, item.id) then
+            bot:trash(item.id, inventory:getItemCount(item.id))
+            sleep(1000)
+            reconnect(worlds, doors, bot.x, bot.y)
+        end
+    end
+end
+
+isPlantable = function(x, y)
+    return getTile(x, y).fg == 0 and getInfo(getTile(x, y + 1).fg).collision_type ~= 0 and getTile(x, y + 1).fg ~= 0 and hasAccess(x, y) ~= 0 and not getTile(x, y):hasFlag(4096)
+end 
+
+isHarvestable = function(x, y)
+    return getTile(x, y).fg == 3 and getTile(x, y):canHarvest() and hasAccess(x, y) ~= 0
+end
+
+isPlaceable = function() 
+    for y = 2, 53, 2 do
+        for x = 1, 98 do
+            if getTile(x, y).fg == 0 and hasAccess(x, y) ~= 0 then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+countTree = function()
+    for _, tile in pairs(bot:getWorld():getTiles()) do
+        if getTile(tile.x, tile.y).fg == 3 and hasAccess(tile.x, tile.y) ~= 0 then
+            return true
+        end
+    end
+    return false
+end
+
+countDirt = function()
+    local count = 0
+    for x = 1, 98 do
+        if isHarvestable(x, 25) then
+            count = count + 1
+        end
+    end
+    return count
+end
+
+storingSeed = function(worlds, doors)
+    ::backs::
+    printed:append('Dropping seeds')
+    seedTbl = shuffle(seedTbl)
+    for i = #seedTbl, 1, -1 do
+        parts = split(seedTbl[i], '[^|]+')
+        world, door = parts[1], parts[2]
+        bot.auto_collect = false
+        warp(world, door)
+        if nuked then
+            nuked = false
+            printed:append('storage drop : '..world..' is NUKED, Skipped world')
+            table.remove(seedTbl, i)
+            customizable.tilx, customizable.tileY = 0, 0
+            if #seedTbl == 0 then
+                txtInfo('All seed storage reached limit, script terminated')
+            end
+        end
+        if wrong then
+            wrong = false
+            printed:append('Storage drop : '..world..' is wrong door, Skipped world')
+            table.remove(seedTbl, i)
+            customizable.tilx, customizable.tileY = 0, 0
+            if #seedTbl == 0 then
+                txtInfo('All seed storage reached limit, script terminated')
+            end
+        end
+        sleep(math.random(1, 1000))
+        if itemFloat(3) < limit or itemFloat(15) < limit then
+            for y, id in pairs(defaultSeed) do
+                for _, tile in pairs(bot:getWorld():getTiles()) do
+                    if tile.fg == posId or tile.bg == posId then
+                        ::back::
+                        bot:findPath(tile.x + (y-1), tile.y - (customizable.tileY))
+                        sleep(math.random(100, 500))
+                        local count = 0
+                        reconnect(world, door, tile.x + (y-1), tile.y - (customizable.tileY))
+                        if tile.y - (customizable.tileY) == 0 then
+                            printed:append('Cant drop cuz bot at coordinate y = 0, skipped world')
+                            table.remove(seedTbl, i)
+                            if #seedTbl == 0 then
+                                txtInfo('All seed storage reached limit, script terminated')
+                            end
+                            goto backs
+                        end
+                        while inventory:getItemCount(id) > 0 do
+                            bot:setDirection(true)
+                            sleep(math.random(100, 500))
+                            bot:drop(id, 200)
+                            sleep(delaydrop)
+                            reconnect(world, door, tile.x + (y-1), tile.y - (customizable.tileY))
+                            count = count + 1
+                            if count >= 2 then
+                                count = 0
+                                customizable.tileY = customizable.tileY + 1
+                                goto back
+                            end
+                        end
+                    end
+                    if inventory:getItemCount(id) == 0 then
+                        break
+                    end
+                end
+            end
+            sleep(math.random(1, 1000))
+            break
+        else
+            printed:append('Storage drop : '..world..' has reached limit, Skipped world')
+            table.remove(seedTbl, i)
+            customizable.tilx, customizable.tileY = 0, 0
+            if #seedTbl == 0 then
+                txtInfo('All seed storage reached limit, script terminated')
+            end
+        end
+    end
+    warp(worlds, doors)
+    bot.auto_collect = true
+end
+
+dropTotalAmount = function(worlds, doors)
+    itemCount = inventory:getItemCount(98)
+    while itemCount > 1 and ((getTile(bot.x - 1, bot.y).fg == 0) or (getTile(bot.x + 1, bot.y).fg == 0)) do
+        dropCount = math.random(1, itemCount - 1)
+        bot:drop(98, dropCount)
+        sleep(delaydrop)
+        reconnect(worlds, doors, bot.x, bot.y)
+        itemCount = inventory:getItemCount(98)
+        break
+    end
+end
+
+botLocations = function(worlds, doors)
+    botX = math.random(1, 98)
+    botY = bot.y
+    while true do
+        if getTile(botX, botY).fg == 0 and #bot:getPath(botX, botY) > 0 then
+            bot:findPath(botX, botY)
+            sleep(300)
+            reconnect(worlds, doors, botX, botY)
+            break
+        else
+            botX = math.random(1, 98)
+        end
+    end
+end
+
+droppingAxe = function(worlds, doors)
+    itemCount = inventory:getItemCount(98)
+    while itemCount > 1 do
+        dropTotalAmount(worlds, doors)
+        itemCount = inventory:getItemCount(98)
+        if itemCount > 1 then
+            botLocations(worlds, doors)
+        end
+    end
+end
+
+seedTotal = function()
+    for _, pack in pairs(defaultSeed) do
+        if inventory:getItemCount(pack) >= 150 then
+            return true
+        end
+    end
+    return false
+end
+
+blockTotal = function()
+    for _, pack in pairs(defaultBlock) do
+        if inventory:getItemCount(pack) >= 150 then
+            return true
+        end
+    end
+    return false
+end
+
+wearingPickaxe = function()
+    local world = split(worldPickaxe[indx], '[^|]+')[1]
+    local door = split(worldPickaxe[indx], '[^|]+')[2]
+    bot.auto_collect = false
+    warp(world, door)
+    if nuked then
+        nuked = false
+        txtInfo('World pickaxe is nuked, Script terminated.')
+        return
+    end
+    if wrong then
+        wrong = false
+        txtInfo('Id door pickaxe is wrong door, Script terminated.')
+        return
+    end
+    sleep(math.random(1, 1000))
+    if itemFloat(98) > 0 then
+        for _, obj in pairs(bot:getWorld():getObjects()) do
+            if obj.id == 98 and #bot:getPath((obj.x + 10) // 32, (obj.y + 10) // 32) > 0 then
+                while not bot:isInTile((obj.x + 10) // 32, (obj.y + 10) // 32) do
+                    bot:findPath((obj.x + 10) // 32, (obj.y + 10) // 32)
+                    sleep(math.random(100, 300))
+                    reconnect(world, door, (obj.x + 10) // 32, (obj.y + 10) // 32)
+                end
+                bot:collect(1)
+                sleep(math.random(300, 500))
+                reconnect(world, door, (obj.x + 10) // 32, (obj.y + 10) // 32)
+            end
+            if inventory:getItemCount(98) > 0 then
+                break
+            end
+        end
+        if inventory:getItemCount(98) > 1 then
+            droppingAxe(world, door)
+            while not inventory:getItem(98).isActive do
+                bot:wear(98)
+                sleep(500)
+                reconnect(world, door, bot.x, bot.y)
+            end
+        end
+    else
+        sleep(math.random(1000, 5000))
+    end
+end
+
+breakSide = function(worlds, doors)
+    printed:append('Break side')
+    local function breakColumn(x)
+        for y = 24, 53 do
+            if getTile(x, y).bg ~= 0 or getTile(x, y).fg ~= 0 then
+                bot:findPath(x, y - 1)
+                sleep(100)
+                reconnect(worlds, doors, x, y - 1)
+                while getTile(x, y).bg ~= 0 or getTile(x, y).fg ~= 0 do
+                    bot:hit(bot.x, bot.y + 1)
+                    sleep(delaypunch)
+                    reconnect(worlds, doors, x, y - 1)
+                end
+            end
+        end
+    end
+    breakColumn(99)
+    breakColumn(0)
+end
+
+breakDirt = function(worlds, doors)
+    printed:append('Break dirt')
+    local function breakTileAtPosition(x, y)
+        bot:findPath(x - 1, y)
+        sleep(100)
+        reconnect(worlds, doors, x - 1, y)
+        while botPunch(x, y) do
+            for _, num in pairs(tileDirt) do
+                if getTile(x, y + num).fg ~= 0 or getTile(x, y + num).bg ~= 0 and hasAccess(x, y + num) ~= 0 then
+                    bot:hit(x, y + num)
+                    sleep(delaypunch)
+                    reconnect(worlds, doors, x - 1, y)
+                end
+            end
+        end
+    end
+    local startY = 3
+    local increment = 6
+    for y = startY, 53, increment do
+        for x = 0, 99 do
+            local tile = getTile(x, y)
+            if tile.bg == 14 or tile.fg == 2 or tile.fg == 10 or tile.fg == 4 then
+                breakTileAtPosition(x, y)
+                if seedTotal() then
+                    if saveSeed then
+                        storingSeed(worlds, doors)
+                    else
+                        recycles(worlds, doors)
+                    end
+                elseif blockTotal() then
+                    recycles(worlds, doors)
+                end
+            end
+        end
+    end
+end
+
+placeDirt = function(worlds, doors)
+    printed:append('Place dirt')
+    for y = 2, 53, 2 do
+        for x = 1, 98 do
+            if getTile(x, y).fg == 0 and hasAccess(x, y) ~= 0 then
+                bot:findPath(x, y - 1)
+                sleep(100)
+                reconnect(worlds, doors, x, y - 1)
+                while getTile(x, y).fg == 0 do
+                    bot:place(x, y, 2)
+                    sleep(delayplace)
+                    reconnect(worlds, doors, x, y - 1)
+                end
+            end
+            if inventory:getItemCount(2) < 3 then
+                while inventory:getItemCount(2) < 180 and isPlaceable() do
+                    takeFloat(worlds, doors, 3)
+                    farmDirt(worlds, doors)
+                    plantDirt(worlds, doors)
+                    harvestDirt(worlds, doors)
+                end
+            end
+        end
+    end
+end
+
+breakLava = function(worlds, doors)
+    printed:append('Break lava')
+    for _, tile in pairs(bot:getWorld():getTiles()) do
+        if tile.fg == 4 then
+            bot:findPath(tile.x, tile.y - 1)
+            sleep(100)
+            reconnect(worlds, doors, tile.x, tile.y - 1)
+            while getTile(bot.x, bot.y + 1).fg == 4 do
+                bot:hit(bot.x, bot.y + 1)
+                sleep(delaypunch)
+                reconnect(worlds, doors, tile.x, tile.y - 1)
+            end
+            while getTile(bot.x, bot.y + 1).fg == 0 and inventory:getItemCount(2) > 0 do
+                bot:place(bot.x, bot.y + 1, 2)
+                sleep(delaypunch)
+                reconnect(worlds, doors, tile.x, tile.y - 1)
+            end
+        end
+    end
+end
+
+plantDirt = function(worlds, doors)
+    printed:append('Planting dirt seed')
+    local tileY = 25
+    for x = 1, 98 do
+        if isPlantable(x, tileY) then
+            bot:findPath(x, tileY)
+            sleep(100)
+            reconnect(worlds, doors, x, tileY)
+            while isPlantable(x, tileY) do
+                bot:place(x, tileY, 3)
+                sleep(delayplant)
+                reconnect(worlds, doors, x, tileY)
+            end
+        end
+        if inventory:getItemCount(3) == 0 then
+            break
+        end
+    end
+    while countDirt() == 0 do
+        sleep(5000)
+    end
+end
+
+harvestDirt = function(worlds, doors)
+    printed:append('Harvesting dirt trees')
+    for _, tile in pairs(bot:getWorld():getTiles()) do
+        if tile.fg == 3 then
+            bot:findPath(tile.x, tile.y)
+            sleep(100)
+            reconnect(worlds, doors, tile.x, tile.y)
+            while isHarvestable(tile.x, tile.y) do
+                bot:hit(tile.x, tile.y)
+                sleep(delayharvest)
+                reconnect(worlds, doors, tile.x, tile.y)
+            end
+        end
+        if inventory:getItemCount(2) >= 180 then
+            return
+        end
+    end
+end
+
+farmDirt = function(worlds, doors)
+    if inventory:getItemCount(3) < 5 then
+        printed:append('Farming dirts')
+        for _, tile in pairs(bot:getWorld():getTiles()) do
+            if tile.fg == 2 then
+                if getTile(tile.x, tile.y - 1).fg == 0 then
+                    bot:findPath(tile.x, tile.y - 1)
+                    sleep(100)
+                    reconnect(worlds, doors, tile.x, tile.y - 1)
+                end
+                while getTile(tile.x, tile.y).fg == 2 and hasAccess(tile.x , tile.y + 1) > 0 do
+                    bot:hit(tile.x, tile.y)
+                    sleep(delaypunch)
+                    reconnect(worlds, doors, tile.x, tile.y - 1)
+                end
+            end
+            if inventory:getItemCount(3) > 25 or not isPlaceable() then
+                break
+            end
+        end
+    end
+end
+
+takeFloat = function(worlds, doors, id)
+    printed:append('Taking float items')
+    for _, obj in pairs(bot:getWorld():getObjects()) do
+        if obj.id == id and #bot:getPath((obj.x + 10) // 32, (obj.y + 10) // 32) > 0 then
+            while not bot:isInTile((obj.x + 10) // 32, (obj.y + 10) // 32) do
+                bot:findPath((obj.x + 10) // 32, (obj.y + 10) // 32)
+                sleep(30)
+                reconnect(worlds, doors, (obj.x + 10) // 32, (obj.y + 10) // 32)
+            end
+        end
+        if inventory:getItemCount(id) >= 200 then
+            return
+        end
+    end
+end
+
+writeFile = function(info, txt)
+    local filePath = folderName .. "/" .. info .. ".txt"
+    local uniqueLines = {}
+    local file = io.open(filePath, "r")
+    if file then
+        for line in file:lines() do
+            uniqueLines[line] = true
+        end
+        file:close()
+    end
+    if not uniqueLines[txt] then
+        uniqueLines[txt] = true
+        file = io.open(filePath, "a")
+        if file then
+            file:write(txt .. "\n")
+            file:close()
+        else
+            txtInfo("Error, Cannot open file " .. filePath)
+        end
+    end
+end
+
+onProcess = function(world, door)
+    warp(world, door)
+    if not nuked and not wrong and not maxpeople then
+        if #getPlayers() <= maxPlayer then
+            bot.auto_collect = true
+            breakSide(world, door)
+            breakDirt(world, door)
+            if replaceLava then
+                breakLava(world, door)
+            end
+            while isPlaceable() do
+                placeDirt(world, door)
+            end
+            printed:append('Rechecking tree')
+            while countTree() do
+                harvestDirt(world, door)
+                recycles(world, door)
+            end
+            printed:append('Collect Blocks')
+            writeFile('WorldCleared', world .. '|' .. door)
+            return true
+        end
+    end
+    return false
+end
+
+while bot.status ~= BotStatus.online do
+    bot:connect()
+    sleep(delayreconnect)
+    if bot.status == BotStatus.online then
+        break
+    elseif bot.status == BotStatus.account_banned then
+        txtInfo('stop','status is '..clientStatic())
+        error('status is '..clientStatic())
+    end
+end
+
+if pickaxe then
+    while inventory:getItemCount(98) == 0 do
+        wearingPickaxe()
+    end
+end
+
+for _, data in pairs(assignedWorlds) do
+    parts = split(data, '[^|]+')
+    world, door = parts[1], parts[2]
+    if not onProcess(world, door) then
+        wrong = false
+        nuked = false
+    end
+end
+
+bot:updateBot('DONE' .. bot.index)
+txtInfo(bot.name .. ' Finished all worlds')
