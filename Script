@@ -1,47 +1,19 @@
+--==========[ Account Switch Config ]==========--
+--=============================================--
 
-setting = {
-    ---> choose "normal" / "guest" account
-    account = "guest",
-    ---> socks5 config
-    proxy = {access = false, botpersocks = 1},
-    ---> symbol format account text
-    symbol = "|",
-    ---> delay bot login
-    delay = 2000,
-    ---> normal account config
-    botList = {
-        "user|pass",
-        "user|pass",
-        "user|pass"
-    },
-    ---> guest config
-    growidletter = 9, 
-    ---> mac & rid guest list
-    macrid = {
-        '02:62:CC:25:B2:90|5137C1D0214313DE48A5AA93EF6AB5AB',
-        '02:9D:EB:44:F7:FF|8E22F3A6D1B296F7F0A15215B12F0F25',
-        '02:E7:08:A1:48:9C|6FC2C2C7020E94FC6CACA99A6A90C262',
-        '02:39:31:1D:71:51|66A29FDFFC731BF9CE49B3A42191CCE1',
-        '02:3A:83:88:23:75|8D8B429F18468D8E863EF99AD56A5BCB',
-        '02:BB:A7:AA:55:83|1E9DF809CA578B6039209493250BF2F1',
-        '02:3B:D7:A1:63:BB|2FB5582028F46F3A9403613E1535E65F',
-        '02:E4:2E:06:D4:2D|2DC8AAF0A645BF0E3AA2023F7FC56773',
-        '02:7A:78:10:54:D1|2E689993048A972A8F9F4DDE04C1ED44',
-        '02:08:32:B4:5E:93|730C8A34C179BFC813C5543FB603D809',
-        '02:B2:71:80:56:64|58673C9073C473D3C9656975C846F2D6',
-        '02:82:17:CD:0A:39|D9CB34FE025C11182FDB9A20FBA0EF0C',
-        '02:A0:FB:B7:5F:2E|8ED53F732549615D8AECE9538EF17792',
-    },
-    ---> proxy socks5 list
-    socksList = {
-        "ip:port:user:pass",
-        "ip:port:user:pass",
-        "ip:port:user:pass"
-    }
+autoSwitch, switchOnLevel = false, 12                                           -- set true to enable auto switch, max level bot to switch
+typeaccount = "normal"                                                          -- choose "normal" / "guest"
+lettername = 10                                                                 -- set letter name if use guest
+
+switchFile = "C:\\Users\\Administrator\\Desktop\\Lucifer v2.29\\switch.txt"     -- world file.txt
+
+withproxy, botperproxy = false, 1                                               -- set true to using proxy, limit bot per proxy
+proxyList = {                                                                   -- proxy list
+    "ip:port:user:pass",
+    "ip:port:user:pass",
+    "ip:port:user:pass"
 }
 
---==========================================--
---------------[ Uneditable Area ]-------------
---==========================================--
-
-return(function(...)local L={"ZXEpQ6==","bIEwnRG=","Ubkw","bIE7tXWdQK==","tR2zC/Ep","NX2oUR24UK==";"URVLZR5P";"HmWzNB5wCR2jUK==","CmWzNm0Ty3E3ZbNjnfdzCm2FUb5dNX59thWdth6jZfEYyzEbHI5y+zV1+zVxHdU26+Eb+DD0s+DO+zrs2HExUbW9y+o9nfdjyfIrCRG9WRVeNhdLUK==","bIEhZL==";"nf2z","sR2zC/Ep";"t/ErnK==","22kbNsDr6I2fZfzq";"tX2q"}for q,l in ipairs({{1,15};{1;12},{13;15}})do while l[1]<l[2]do L[l[1]],L[l[2]],l[1],l[2]=L[l[2]],L[l[1]],l[1]+1,l[2]-1 end end local function q(q)return L[q+8448]end do local q=math.floor local l=table.insert local H=table.concat local k=L local C=string.sub local N=string.len local Q={j=46,G=56;n=25;X=38,["8"]=59;J=42;F=34,t=27,i=60;O=10;m=7,M=2,["4"]=51;N=28;R=22,["/"]=6;["5"]=13;x=1;u=62;f=54,V=57,["+"]=20;s=19;z=52;B=4;Y=45;h=39,L=48,p=36,r=33,W=17;S=63,["7"]=41;k=9,P=43,K=0;["2"]=21;Q=30;["0"]=12;I=53;b=23;l=8;C=26;v=32,q=55;Z=24,["9"]=47,["6"]=16,E=61,T=58,c=31;d=37;A=40,o=49,w=44,U=29;y=11;["3"]=50;D=5;["1"]=14;g=3;H=18,e=35,a=15}local i=string.char local F=type for L=1,#k,1 do local u=k[L]if F(u)=="string"then local F=N(u)local x={}local T=1 local S=0 local s=0 while T<=F do local L=C(u,T,T)local H=Q[L]if H then S=S+H*64^(3-s)s=s+1 if s==4 then s=0 local L=q(S/65536)local H=q((S%65536)/256)local k=S%256 l(x,i(L,H,k))S=0 end elseif L=="="then l(x,i(q(S/65536)))if T>=F or C(u,T+1,T+1)~="="then l(x,i(q((S%65536)/256)))end break end T=T+1 end k[L]=H(x)end end end return(function(L,H,k,C,N,Q,i,u,F,A,g,l,s,T,x,S)x,T,u,s,l,g,S,F,A=function()T=1+T u[T]=1 return T end,0,{},function(L)local q,l=1,L[1]while l do u[l],q=u[l]-1,q+1 if u[l]==0 then u[l],F[l]=nil,nil end l=L[q]end end,function(l,k,C,N)local x,i,s,u,S,F,T while l do F=k x=q(-8443)l=q(-8442)i=L[x]x=q(-8436)u=l l=i[x]T=q(-8439)i=l()l=q(-8446)S=L[T]T=q(-8440)x=i i=S[T]x[l]=i l=q(-8433)i=u x[l]=i i=q(-8438)l=q(-8445)l=x[l]l=l(x)s=q(-8435)u=nil S=l l=L[i]T=S[s]i=l(T)l=i()S=nil l=L[q(-8437)]i={}x=nil end l=#N return H(i)end,function(L)u[L]=u[L]-1 if u[L]==0 then u[L],F[L]=nil,nil end end,function(L)for q=1,#L,1 do u[L[q]]=1+u[L[q]]end if k then local l=k(true)local H=N(l)H[q(-8447)],H[q(-8441)],H[q(-8434)]=L,s,function()return-1690646 end return l else return C({},{[q(-8441)]=s;[q(-8447)]=L,[q(-8434)]=function()return-1690646 end})end end,{},function(L,q)local H=S(q)local k=function(...)return l(L,{...},q,H)end return k end return(A(8840783,{}))(H(i))end)(getfenv and getfenv()or _ENV,unpack or table[q(-8444)],newproxy,setmetatable,getmetatable,select,{...})end)(...)
+--=================================--
+--==========[ Code Area ]==========--
+--=================================--
