@@ -1,19 +1,20 @@
---==========[ Account Switch Config ]==========--
---=============================================--
-
-autoSwitch, switchOnLevel = false, 12                                           -- set true to enable auto switch, max level bot to switch
-typeaccount = "normal"                                                          -- choose "normal" / "guest"
-lettername = 10                                                                 -- set letter name if use guest
-
-switchFile = "C:\\Users\\Administrator\\Desktop\\Lucifer v2.29\\switch.txt"     -- world file.txt
-
-withproxy, botperproxy = false, 1                                               -- set true to using proxy, limit bot per proxy
-proxyList = {                                                                   -- proxy list
-    "ip:port:user:pass",
-    "ip:port:user:pass",
-    "ip:port:user:pass"
-}
-
---=================================--
---==========[ Code Area ]==========--
---=================================--
+derfactory001|moy28
+derfactory002|moy28
+derfactory003|moy28
+derfactory004|moy28
+derfactory005|moy28
+derfactory006|moy28
+derfactory007|moy28
+derfactory008|moy28
+derfactory009|moy28
+derfactory0010|moy28
+derfactory0011|moy28
+derfactory0012|moy28
+derfactory0013|moy28
+derfactory0014|moy28
+derfactory0015|moy28
+derfactory0016|moy28
+derfactory0017|moy28
+derfactory0018|moy28
+derfactory0019|moy28
+derfactory0020|moy28
